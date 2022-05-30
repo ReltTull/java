@@ -1,4 +1,3 @@
-package gb;
 
 public class lc_1920 {
     static int[] swappedMeaningForIndex(int[] inputArray) {
@@ -13,7 +12,7 @@ public class lc_1920 {
                 System.out.println(input[i]);
             }
         }
-        
-    public static void main(String[] args) {
-        printArray(swappedMeaningForIndex(new int[]{3, 0, 2, 1}));
-}}
+        public static void main(String[] args) {
+            printArray(swappedMeaningForIndex(new int[]{3, 0, 2, 1}));
+        }       
+}
