@@ -1,11 +1,11 @@
 
 public class lc_1920 {
-    static int[] swappedMeaningForIndex(int[] inputArray) {
-        int[] result = new int [inputArray.length];
-        for (int i = 0; i < inputArray.length; i++) {
-            result[i] = inputArray[inputArray[i]];
+    static int[] swappedMeaningForIndex(int[] nums) {
+        int[] ans = new int [nums.length];
+        for (int i = 0; i < nums.length; i++) {
+            ans[i] = nums[nums[i]];
         }
-        return result;
+        return ans;
         }
         static void printArray(int[] input) {
             for (int i = 0; i < input.length; i++) {
