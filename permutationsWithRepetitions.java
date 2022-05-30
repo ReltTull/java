@@ -1,4 +1,3 @@
-package gb;
 
 public class permutationsWithRepetitions {
     static void permutaionsWithTheRepetitons(int lenght, int maxValue, int fixer) {
