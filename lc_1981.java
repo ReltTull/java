@@ -1,4 +1,3 @@
-package gb;
 
 public class lc_1981 {
     static int subtractProductAndSum(int n) {
@@ -17,6 +16,6 @@ public class lc_1981 {
     return result;
     }
     public static void main(String[] args) {
-        System.out.println(subtractProductAndSum(239)); 
+        // System.out.println(subtractProductAndSum(239)); 
     }}
 
