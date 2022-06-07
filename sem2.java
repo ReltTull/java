@@ -1,8 +1,6 @@
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 
-// Напишите метод, который сжимает строку. Пример: вход aaaabbbcdd, результат - a4b3cd2
 public class sem2 {
 
     // Напишите метод, который принимает на вход строку (String) и определяет
@@ -47,47 +45,34 @@ public class sem2 {
     // Предложить хотя бы одно решение или сообщить, что его нет.
 
     static char[] textGlobal;
-    public static char[] substituteValue(char[] array, int[] substituted) {
-        int subsIndex = 0;
-        for (int i = 0; i < array.length; i++) {
-            if(array[i] == '?') {
-                char subs = (char) substituted[subsIndex];
-                array[i] = subs;
-                subsIndex += 1;
-            }
-        }
-        return array;
-    }
-
-
-
+    static ArrayList<Integer> signIndexesGlobal;
 
     public static void main(String[] args) throws IOException {
         ArrayList<Integer> signIndexes = new ArrayList<>();
-        // String text = "5? + 7? = 1??";
-        String text = "?5 + 7? = 1??";
+        String text = "?? + ?3 = ??";
 
         char[] textChar = text.replace(" ", "").toCharArray();
+        // строки менять нельзя, поэтому конвертируем в char[] (одновременно убирая
+        // пробелы)
 
         for (int i = 0; i < textChar.length; i++) {
             if (textChar[i] == '+' || textChar[i] == '=') {
                 textChar[i] = '-';
             }
+            // меняем символы на один символ для возможности разделения чисел
             if (textChar[i] == '?') {
                 signIndexes.add(i);
             }
+            // подсчитываем кол-во пропущенных чисел для определения размера массива
+            // подставляемых чисел
         }
 
         textGlobal = textChar;
-        String[] numbers = String.valueOf(textChar).split("-");
-        int a = Integer.parseInt(numbers[0]);
-        int b = Integer.parseInt(numbers[1]);
-        int c = Integer.parseInt(numbers[2]);
+        signIndexesGlobal = signIndexes;
 
-        if (a + b == c) {
-            System.out.println(textChar);
-        }
-        System.out.println(Arrays.toString(numbers));
+        // "Global" позволяет использовать переменную вне функции
+
+        combWithRep(new int[signIndexes.size()], 0, 10);
 
     }
 
@@ -95,7 +80,9 @@ public class sem2 {
         if (index == comb.length) {
             // на место вопросов подставить comb, т.е. в textGlobal подставить значения из
             // numbers?
-            substituteValue(textGlobal, comb);
+
+            // substituteValue(textGlobal, comb);
+            checkComb(comb);
             return;
         }
 
@@ -103,6 +90,23 @@ public class sem2 {
             comb[index] = i;
             combWithRep(comb, index + 1, K);
         }
+    }
+
+    public static void checkComb(int[] comb) {
+        for (int i = 0; i < comb.length; i++) {
+            textGlobal[signIndexesGlobal.get(i)] = Character.forDigit(comb[i], 10);
+        }
+
+        String[] numbers = String.valueOf(textGlobal).split("-");
+        int a = Integer.parseInt(numbers[0]);
+        int b = Integer.parseInt(numbers[1]);
+        int c = Integer.parseInt(numbers[2]);
+
+        if (a + b == c) {
+            System.out.printf("%d + %d = %d", a, b, c);
+            System.out.println();
+        }
+
     }
 
 }
